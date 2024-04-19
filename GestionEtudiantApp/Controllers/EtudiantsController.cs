@@ -57,6 +57,7 @@ namespace GestionEtudiantApp.Controllers
             return View(etudiant);
         }
 
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

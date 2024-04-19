@@ -1,75 +1,64 @@
 ﻿@model GestionEtudiantApp.Models.Etudiant
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Nouvel étudiant";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nouvel Etudiant</h2>
+<h2>Nouvel étudiant</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row">
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Prenom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Prenom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Prenom, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Prenom, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Sexe, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-              @Html.RadioButtonFor(model => model.Sexe, "Homme", new { htmlAttributes = new { @class = "form-control" } }) Homme
-              @Html.RadioButtonFor(model => model.Sexe, "Femme", new { htmlAttributes = new { @class = "form-control" } }) Femme
-              @Html.ValidationMessageFor(model => model.Sexe, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateNais, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateNais, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateNais, "", new { @class = "text-danger" })
-            </div>
-        </div>
-       <br/><br/>
-        <div class="d-flex justify-content-between">
-            <div class="col-md-offset-2 col-md-10">
-                <input class="btn btn-primary" type="submit" value="Enregistrer" id="Enregistrer"  />
-            </div>
+            @Html.LabelFor(model => model.Sexe, htmlAttributes: new { @class = "control-label" })
             <div>
-                <a class="btn btn-primary" href="./../../Etudiants/Index" role="button">Retour</a>
+                @Html.RadioButtonFor(model => model.Sexe, "Homme", new { htmlAttributes = new { @class = "form-check-input" } }) Homme
+                @Html.RadioButtonFor(model => model.Sexe, "Femme", new { htmlAttributes = new { @class = "form-check-input" } }) Femme
             </div>
+            @Html.ValidationMessageFor(model => model.Sexe, "", new { @class = "text-danger" })
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateNais, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.DateNais, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DateNais, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a class="btn btn-secondary" href="./../../Etudiants/Index" role="button">Retour</a>
+        </div>
+
     </div>
 }
 
-
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+KE5x/9GH2j+8l6+cgwY5/2Qm5mZc2YYn2fEJlQ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-BoZ+M57Pzwr2ZQ6H3LwZD6/K/8RjApS4xQfRSNDn+8W1OzJr71oQIGLqBrVw9oc6udj6jiI2zArOT9Fh+WU6IQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-zl5vWPUZWS1gG7QFvN74u4bTYg+S/j1JzHQY5qy5npN4pxQvOqaz0ZsId2ZyTlq2I4xDx4z3EfeKiYCU5Vf4qA==" crossorigin="anonymous"></script>
+}

@@ -1,7 +1,7 @@
 ﻿@model GestionEtudiantApp.Models.Etudiant
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Supprimer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,53 +15,21 @@
         <dt>
             @Html.DisplayNameFor(model => model.Nom)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Nom)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Prenom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prenom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sexe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sexe)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateNais)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateNais)
-        </dd>
+        
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input class="btn btn-primary" type="submit" value="Supprimer" /> |
-             <a class="btn btn-primary" href="./../../Etudiants/Index" role="button"> Retour </a>
+            <input class="btn btn-danger" type="submit" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?');" />
+            <a class="btn btn-primary" href="./../../Etudiants/Index" role="button"> Retour </a>
         </div>
     }
 </div>
-
-

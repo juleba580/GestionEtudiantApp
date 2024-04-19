@@ -11,6 +11,9 @@ namespace GestionEtudiantApp.Models
     [Table("Etudiant")]
     public partial class Etudiant
     {
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
