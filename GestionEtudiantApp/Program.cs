@@ -1,6 +1,5 @@
 
 using Microsoft.EntityFrameworkCore;
-using GestionEtudiantApp.Data;
 using GestionEtudiantApp.Models;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
