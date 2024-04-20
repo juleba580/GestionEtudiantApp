@@ -1,6 +1,5 @@
 
 using Microsoft.EntityFrameworkCore;
-using GestionEtudiantApp.Data;
 using GestionEtudiantApp.Models;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
@@ -11,8 +10,7 @@ builder.Services.AddControllersWithViews();
 
 //builder.Services.AddDbContext<GestionEtudiantAppDbContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SeleniumAppDB;Trusted_Connection=True;"));
 
-// Configure in memory database
-//builder.Services.AddDbContext<GestionEtudiantAppDbContext>(opt => opt.UseInMemoryDatabase("GestionEtudiantAppDB"));
+//config database with mysql
 builder.Services.AddDbContext<GestionEtudiantAppDbContext>(options =>
     options.UseMySql("Server=localhost;Port=3306;Database=gestionetudiant;Uid=root;", new MySqlServerVersion(new Version(8, 0, 23))));
 
