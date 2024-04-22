@@ -17,10 +17,10 @@ namespace GestionEtudiantAppTest
         [Fact]
         public void AddUserTest()
         {
-            // Navigate to the page where you add a user
+            // Navigat to my add page user
             _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Etudiants/Create");
 
-            // Find the input fields and submit button
+            // Recherchez les champs de saisie et le bouton Soumettre
             var nomInput = _driver.FindElement(By.Id("Nom"));
             var prenomInput = _driver.FindElement(By.Id("Prenom"));
             var emailInput = _driver.FindElement(By.Id("Email"));
@@ -28,19 +28,28 @@ namespace GestionEtudiantAppTest
             var dateNaisInput = _driver.FindElement(By.Id("DateNais"));
             var submitButton = _driver.FindElement(By.Id("submitButton"));
 
-            // Fill in the user information
-            nomInput.SendKeys("TestNom");
-            prenomInput.SendKeys("TestPrenom");
-            emailInput.SendKeys("test@example.com");
-            sexeInput.SendKeys("Homme"); // Assuming it's a dropdown
-            dateNaisInput.SendKeys("04/22/1990"); // Assuming date format is MM/DD/YYYY
+            // Remplire les informations utilisateur
+            nomInput.SendKeys("TestSouley");
+            prenomInput.SendKeys("TestBa");
+            emailInput.SendKeys("souleyt@galbeme.com");
+            sexeInput.SendKeys("Homme");
+            dateNaisInput.SendKeys("04/22/1990");
 
-            // Submit the form
+            // Soumettre le formulaire
             submitButton.Click();
 
-            // Optionally, you can add assertions to check if the user is added successfully
-            // For example, you can check if the user appears in the list of users or if a success message is displayed
-        }
+            // si l'utilisateur est ajouté avec succès
+            var successMessage = _driver.FindElement(By.Id("successMessage"));
+            Assert.NotNull(successMessage);
+            Assert.Contains("User added successfully", successMessage.Text);
+
+           // vérifier si l'utilisateur apparaît dans la liste des utilisateurs
+            var userList = _driver.FindElement(By.Id("userList"));
+            Assert.Contains("TestNom", userList.Text);
+            Assert.Contains("TestPrenom", userList.Text);
+            Assert.Contains("test@example.com", userList.Text);
+
+             }
     }
 
     public class ChromeDriverFixture : IDisposable
