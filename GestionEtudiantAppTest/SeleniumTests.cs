@@ -20,20 +20,21 @@ namespace GestionEtudiantAppTest
             // Navigat to my add page user
             _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Etudiants/Create");
 
-            // Recherchez les champs de saisie et le bouton Soumettre
-            var nomInput = _driver.FindElement(By.Id("Nom"));
-            var prenomInput = _driver.FindElement(By.Id("Prenom"));
-            var emailInput = _driver.FindElement(By.Id("Email"));
-            var sexeInput = _driver.FindElement(By.Id("Sexe"));
-            var dateNaisInput = _driver.FindElement(By.Id("DateNais"));
-            var submitButton = _driver.FindElement(By.Id("submitButton"));
+            // Localiser les champs de saisie et le bouton Soumettre
+            var nomInput = _driver.FindElement(By.XPath("//input[@id='Nom']"));
+            var prenomInput = _driver.FindElement(By.XPath("//input[@id='Prenom']"));
+            var emailInput = _driver.FindElement(By.XPath("//input[@id='Email']"));
+            var sexeInput = _driver.FindElement(By.XPath("//input[@id='Sexe']"));
+            var dateNaisInput = _driver.FindElement(By.XPath("//input[@id='DateNais']"));
+            var submitButton = _driver.FindElement(By.XPath("//button[@type='submit']"));
+
 
             // Remplire les informations utilisateur
             nomInput.SendKeys("TestSouley");
             prenomInput.SendKeys("TestBa");
             emailInput.SendKeys("souleyt@galbeme.com");
             sexeInput.SendKeys("Homme");
-            dateNaisInput.SendKeys("04/22/1990");
+            dateNaisInput.SendKeys("04/02/1990");
 
             // Soumettre le formulaire
             submitButton.Click();
