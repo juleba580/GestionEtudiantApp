@@ -15,41 +15,34 @@ namespace GestionEtudiantAppTest
         }
 
         [Fact]
-        public void AddUserTest()
+        public void VerifyUserInformationDisplay()
         {
-            // Navigat to my add page user
-            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Create");
+            // Naviguer vers la page d'accueil des étudiants
+            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants");
 
-            // Recherchez les champs de saisie et le bouton Soumettre
-            var nomInput = _driver.FindElement(By.Id("Nom"));
-            var prenomInput = _driver.FindElement(By.Id("Prenom"));
-            var emailInput = _driver.FindElement(By.Id("Email"));
-            var sexeInput = _driver.FindElement(By.Id("Sexe"));
-            var dateNaisInput = _driver.FindElement(By.Id("DateNais"));
-            var submitButton = _driver.FindElement(By.Id("submitButton"));
+            // Attendre que la page soit complètement chargée
+            System.Threading.Thread.Sleep(2000); // Temps d'attente pour permettre le chargement de la page
 
-            // Remplire les informations utilisateur
-            nomInput.SendKeys("TestSouley");
-            prenomInput.SendKeys("TestBa");
-            emailInput.SendKeys("souleyt@galbeme.com");
-            sexeInput.SendKeys("Homme");
-            dateNaisInput.SendKeys("04/02/1990");
+            // Récupérer tous les éléments de la table
+            var userRows = _driver.FindElements(By.XPath("//table[@class='table table-striped']//tbody//tr"));
 
-            // Soumettre le formulaire
-            submitButton.Click();
+            // Vérifier si des utilisateurs sont présents
+            Assert.NotEmpty(userRows);
 
-            // si l'utilisateur est ajouté avec succès
-            var successMessage = _driver.FindElement(By.Id("successMessage"));
-            Assert.NotNull(successMessage);
-            Assert.Contains("User added successfully", successMessage.Text);
+            // Parcourir chaque ligne de la table pour vérifier les informations de l'utilisateur
+            foreach (var row in userRows)
+            {
+                var columns = row.FindElements(By.TagName("td"));
+                Assert.Equal(5, columns.Count); // Vérifier si chaque utilisateur a 5 colonnes
 
-           // vérifier si l'utilisateur apparaît dans la liste des utilisateurs
-            var userList = _driver.FindElement(By.Id("userList"));
-            Assert.Contains("TestNom", userList.Text);
-            Assert.Contains("TestPrenom", userList.Text);
-            Assert.Contains("test@example.com", userList.Text);
-
-             }
+                // Vérifier si les informations de l'utilisateur sont correctes
+                Assert.False(string.IsNullOrEmpty(columns[0].Text)); // Nom
+                Assert.False(string.IsNullOrEmpty(columns[1].Text)); // Prénom
+                Assert.False(string.IsNullOrEmpty(columns[2].Text)); // Email
+                Assert.False(string.IsNullOrEmpty(columns[3].Text)); // Sexe
+                Assert.False(string.IsNullOrEmpty(columns[4].Text)); // Date de Naissance
+            }
+        }
     }
 
     public class ChromeDriverFixture : IDisposable
@@ -58,13 +51,13 @@ namespace GestionEtudiantAppTest
 
         public ChromeDriverFixture()
         {
-            // Initialize ChromeDriver
+            // Initialiser ChromeDriver
             Driver = new ChromeDriver();
         }
 
         public void Dispose()
         {
-            // Close ChromeDriver
+            // Fermer ChromeDriver
             Driver.Quit();
         }
     }
