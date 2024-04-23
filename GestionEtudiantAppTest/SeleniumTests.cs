@@ -22,14 +22,13 @@ namespace GestionEtudiantAppTest
 
             // Localiser les champs de saisie et le bouton Soumettre
 
-            var nomInput = _driver.FindElement(By.XPath("//input[@id='Nom']"));
-            // Afficher le résultat dans une boîte de dialogue
-            System.Windows.Forms.MessageBox.Show(nomInput.Text);
-            var prenomInput = _driver.FindElement(By.XPath("//input[@id='Prenom']"));
-            var emailInput = _driver.FindElement(By.XPath("//input[@id='Email']"));
-            var sexeInput = _driver.FindElement(By.XPath("//input[@id='Sexe']"));
-            var dateNaisInput = _driver.FindElement(By.XPath("//input[@id='DateNais']"));
-            var submitButton = _driver.FindElement(By.XPath("//button[@type='submit']"));
+            var nomInput = _driver.FindElement(By.CssSelector("input#Nom"));
+            var prenomInput = _driver.FindElement(By.CssSelector("input#Prenom"));
+            var emailInput = _driver.FindElement(By.CssSelector("input#Email"));
+            var sexeInput = _driver.FindElement(By.CssSelector("input#Sexe"));
+            var dateNaisInput = _driver.FindElement(By.CssSelector("input#DateNais"));
+            var submitButton = _driver.FindElement(By.CssSelector("button[type='submit']"));
+
 
 
             // Remplire les informations utilisateur
