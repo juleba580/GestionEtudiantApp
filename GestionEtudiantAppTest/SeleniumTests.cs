@@ -17,30 +17,27 @@ namespace GestionEtudiantAppTest
         [Fact]
         public void VerifyUserInformationDisplay()
         {
-            // Naviguer vers la page d'accueil des étudiants
-            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants");
+            // Naviguer vers la page des étudiants
+            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Index");
 
-            // Attendre que la page soit complètement chargée
-            System.Threading.Thread.Sleep(2000); // Temps d'attente pour permettre le chargement de la page
+            // Attendre que la page se charge complètement
+            System.Threading.Thread.Sleep(2000); // Attendre 2 secondes (à remplacer par une attente explicite si possible)
 
-            // Récupérer tous les éléments de la table
-            var userRows = _driver.FindElements(By.XPath("//table[@class='table table-striped']//tbody//tr"));
+            // Trouver tous les éléments de la table des étudiants
+            var studentRows = _driver.FindElements(By.XPath("//table[@class='table table-striped']//tbody//tr"));
 
-            // Vérifier si des utilisateurs sont présents
-            Assert.NotEmpty(userRows);
+            // Vérifier que la table contient au moins une ligne d'étudiant
+            Assert.NotEmpty(studentRows);
 
-            // Parcourir chaque ligne de la table pour vérifier les informations de l'utilisateur
-            foreach (var row in userRows)
+            // Vérifier que chaque ligne d'étudiant contient des informations non vides
+            foreach (var row in studentRows)
             {
                 var columns = row.FindElements(By.TagName("td"));
-                Assert.Equal(5, columns.Count); // Vérifier si chaque utilisateur a 5 colonnes
-
-                // Vérifier si les informations de l'utilisateur sont correctes
-                Assert.False(string.IsNullOrEmpty(columns[0].Text)); // Nom
-                Assert.False(string.IsNullOrEmpty(columns[1].Text)); // Prénom
-                Assert.False(string.IsNullOrEmpty(columns[2].Text)); // Email
-                Assert.False(string.IsNullOrEmpty(columns[3].Text)); // Sexe
-                Assert.False(string.IsNullOrEmpty(columns[4].Text)); // Date de Naissance
+                Assert.True(columns.Count >= 5); // S'assurer qu'il y a au moins 5 colonnes pour les informations de l'étudiant
+                foreach (var column in columns)
+                {
+                    Assert.False(string.IsNullOrEmpty(column.Text.Trim())); // Vérifier que le texte de chaque colonne n'est pas vide
+                }
             }
         }
     }
