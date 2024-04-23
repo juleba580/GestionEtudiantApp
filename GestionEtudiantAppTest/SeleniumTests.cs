@@ -17,7 +17,7 @@ namespace GestionEtudiantAppTest
         public void VerifyStudentListPageDisplaysCorrectly()
         {
             // Naviguer vers la page des étudiants
-            _driver.Navigate().GoToUrl("http://localhost:7173/Etudiants/Index");
+            _driver.Navigate().GoToUrl("http1://localhost:7173/Etudiants/Index");
 
             // Vérifier que la page est chargée en vérifiant le titre ou d'autres éléments distinctifs
             Assert.Contains("Liste des étudiants", _driver.Title);
