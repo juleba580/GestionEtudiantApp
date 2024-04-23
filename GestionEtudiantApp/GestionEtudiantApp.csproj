@@ -8,9 +8,14 @@
 
   <ItemGroup>
     <Compile Remove="Data\**" />
+    <Compile Remove="Properties\NewFolder\**" />
     <Content Remove="Data\**" />
+    <Content Remove="Properties\NewFolder\**" />
     <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Properties\NewFolder\**" />
     <None Remove="Data\**" />
+    <None Remove="Properties\NewFolder\**" />
+    <_WebToolingArtifacts Remove="Properties\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +33,10 @@
     <PackageReference Include="NUnit" Version="4.1.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="124.0.6367.6000" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\NewFolder1\" />
   </ItemGroup>
 
 </Project>

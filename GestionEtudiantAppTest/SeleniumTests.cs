@@ -7,21 +7,6 @@ namespace GestionEtudiantAppTest
     public class SeleniumTests
     {
         
-            driver.Quit();
-        }
-            driver.Quit();
-        }
-            driver.Quit();
-        }
-            driver.Quit();
-        }
-            driver.Quit();
-        }
-            driver.Quit();
-        }
-            driver.Quit();
-        }
-            driver.Quit();
-        }
+         
     }
 }
