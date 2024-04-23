@@ -18,7 +18,7 @@ namespace GestionEtudiantAppTest
         public void AddUserTest()
         {
             // Navigat to my add page user
-            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Etudiants/Create");
+            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Etudiants/create");
 
             // Localiser les champs de saisie et le bouton Soumettre
             var nomInput = _driver.FindElement(By.XPath("//input[@id='Nom']"));
