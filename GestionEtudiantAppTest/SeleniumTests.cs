@@ -21,7 +21,7 @@ namespace GestionEtudiantAppTest
             System.Threading.Thread.Sleep(2000); // Attendre 2 secondes (à remplacer par une attente explicite si possible)
 
             // Trouver tous les éléments de la table des étudiants
-            var studentRows = driver.FindElements(By.XPath("//table[@class='table table-striped']//tbody//tr"));
+            var studentRows = driver.FindElements(By.CssSelector("table.table.table-striped tbody tr"));
 
             // Vérifier que la table contient au moins une ligne d'étudiant
             Assert.NotEmpty(studentRows);
