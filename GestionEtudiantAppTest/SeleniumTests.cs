@@ -1,30 +1,27 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
 using Xunit;
 
 namespace GestionEtudiantAppTest
 {
-    public class SeleniumTests : IClassFixture<ChromeDriverFixture>
+    public class SeleniumTests
     {
-        private readonly IWebDriver _driver;
-
-        public SeleniumTests(ChromeDriverFixture fixture)
-        {
-            _driver = fixture.Driver;
-        }
-
         [Fact]
-        public void VerifyUserInformationDisplay()
+        public void VerifyStudentsDisplay()
         {
-            // Naviguer vers la page des étudiants
-            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Index");
+            // Configuration du pilote Chrome
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--headless"); // Pour exécuter le navigateur en mode headless (sans interface graphique)
+            IWebDriver driver = new ChromeDriver(options);
+
+            // Navigation vers la page des étudiants
+            driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Index");
 
             // Attendre que la page se charge complètement
             System.Threading.Thread.Sleep(2000); // Attendre 2 secondes (à remplacer par une attente explicite si possible)
 
             // Trouver tous les éléments de la table des étudiants
-            var studentRows = _driver.FindElements(By.XPath("//table[@class='table table-striped']//tbody//tr"));
+            var studentRows = driver.FindElements(By.XPath("//table[@class='table table-striped']//tbody//tr"));
 
             // Vérifier que la table contient au moins une ligne d'étudiant
             Assert.NotEmpty(studentRows);
@@ -39,23 +36,9 @@ namespace GestionEtudiantAppTest
                     Assert.False(string.IsNullOrEmpty(column.Text.Trim())); // Vérifier que le texte de chaque colonne n'est pas vide
                 }
             }
-        }
-    }
 
-    public class ChromeDriverFixture : IDisposable
-    {
-        public IWebDriver Driver { get; }
-
-        public ChromeDriverFixture()
-        {
-            // Initialiser ChromeDriver
-            Driver = new ChromeDriver();
-        }
-
-        public void Dispose()
-        {
-            // Fermer ChromeDriver
-            Driver.Quit();
+            // Fermer le navigateur
+            driver.Quit();
         }
     }
 }
