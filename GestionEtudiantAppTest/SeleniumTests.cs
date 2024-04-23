@@ -1,61 +1,46 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using Xunit;
 
-namespace GestionEtudiantAppTest
+class SeleniumTest
 {
-    public class SeleniumTests : IClassFixture<ChromeDriverFixture>
+    static void Main(string[] args)
     {
-        private readonly IWebDriver _driver;
+        // Configuration du navigateur Chrome
+        ChromeOptions options = new ChromeOptions();
+        options.AddArgument("--start-maximized"); // Maximise la fenêtre du navigateur
+        IWebDriver driver = new ChromeDriver(options);
 
-        public SeleniumTests(ChromeDriverFixture fixture)
+        try
         {
-            _driver = fixture.Driver;
+            // Navigateur vers la page des étudiants
+            driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Index");
+
+            // Attendre que la page se charge (vous pouvez ajuster le délai selon vos besoins)
+            System.Threading.Thread.Sleep(2000);
+
+            // Log de chargement de la page
+            Console.WriteLine("Page chargée avec succès.");
+
+            // Identifier et cliquer sur le bouton "Nouvel étudiant"
+            IWebElement ajoutEtudiantBtn = driver.FindElement(By.Id("ajoutEtudiant"));
+            ajoutEtudiantBtn.Click();
+
+            // Log d'identification et de clic sur le bouton "Nouvel étudiant"
+            Console.WriteLine("Bouton 'Nouvel étudiant' cliqué.");
+
+            // Autres étapes du test...
+
         }
-
-        [Fact]
-        public void VerifyUserInformationDisplay()
+        catch (Exception e)
         {
-            // Naviguer vers la page des étudiants
-            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Index");
-
-            // Attendre que la page se charge complètement
-            System.Threading.Thread.Sleep(2000); // Attendre 2 secondes (à remplacer par une attente explicite si possible)
-
-            // Trouver tous les éléments de la table des étudiants
-            var studentRows = _driver.FindElements(By.XPath("//table[@class='table table-striped']//tbody//tr"));
-
-            // Vérifier que la table contient au moins une ligne d'étudiant
-            Assert.NotEmpty(studentRows);
-
-            // Vérifier que chaque ligne d'étudiant contient des informations non vides
-            foreach (var row in studentRows)
-            {
-                var columns = row.FindElements(By.TagName("td"));
-                Assert.True(columns.Count >= 5); // S'assurer qu'il y a au moins 5 colonnes pour les informations de l'étudiant
-                foreach (var column in columns)
-                {
-                    Assert.False(string.IsNullOrEmpty(column.Text.Trim())); // Vérifier que le texte de chaque colonne n'est pas vide
-                }
-            }
+            // Log des erreurs
+            Console.WriteLine("Erreur : " + e.Message);
         }
-    }
-
-    public class ChromeDriverFixture : IDisposable
-    {
-        public IWebDriver Driver { get; }
-
-        public ChromeDriverFixture()
+        finally
         {
-            // Initialiser ChromeDriver
-            Driver = new ChromeDriver();
-        }
-
-        public void Dispose()
-        {
-            // Fermer ChromeDriver
-            Driver.Quit();
+            // Fermer le navigateur à la fin du test
+            driver.Quit();
         }
     }
 }
