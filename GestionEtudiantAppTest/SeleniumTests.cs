@@ -21,7 +21,10 @@ namespace GestionEtudiantAppTest
             _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Etudiants/create");
 
             // Localiser les champs de saisie et le bouton Soumettre
+
             var nomInput = _driver.FindElement(By.XPath("//input[@id='Nom']"));
+            // Afficher le résultat dans une boîte de dialogue
+            System.Windows.Forms.MessageBox.Show(nomInput.Text);
             var prenomInput = _driver.FindElement(By.XPath("//input[@id='Prenom']"));
             var emailInput = _driver.FindElement(By.XPath("//input[@id='Email']"));
             var sexeInput = _driver.FindElement(By.XPath("//input[@id='Sexe']"));
