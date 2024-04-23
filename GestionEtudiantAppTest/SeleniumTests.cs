@@ -5,8 +5,5 @@ using Xunit;
 
 namespace GestionEtudiantAppTest
 {
-    public class SeleniumTests : IClassFixture<ChromeDriverFixture>
-    {
-        
-    }
+   
 }
