@@ -18,18 +18,15 @@ namespace GestionEtudiantAppTest
         public void AddUserTest()
         {
             // Navigat to my add page user
-            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/create");
+            _driver.Navigate().GoToUrl("https://localhost:7173/Etudiants/Create");
 
-            // Localiser les champs de saisie et le bouton Soumettre
-
-            var nomInput = _driver.FindElement(By.CssSelector("input#Nom"));
-            var prenomInput = _driver.FindElement(By.CssSelector("input#Prenom"));
-            var emailInput = _driver.FindElement(By.CssSelector("input#Email"));
-            var sexeInput = _driver.FindElement(By.CssSelector("input#Sexe"));
-            var dateNaisInput = _driver.FindElement(By.CssSelector("input#DateNais"));
-            var submitButton = _driver.FindElement(By.CssSelector("button[type='submit']"));
-
-
+            // Recherchez les champs de saisie et le bouton Soumettre
+            var nomInput = _driver.FindElement(By.Id("Nom"));
+            var prenomInput = _driver.FindElement(By.Id("Prenom"));
+            var emailInput = _driver.FindElement(By.Id("Email"));
+            var sexeInput = _driver.FindElement(By.Id("Sexe"));
+            var dateNaisInput = _driver.FindElement(By.Id("DateNais"));
+            var submitButton = _driver.FindElement(By.Id("submitButton"));
 
             // Remplire les informations utilisateur
             nomInput.SendKeys("TestSouley");
